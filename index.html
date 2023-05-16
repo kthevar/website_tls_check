@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Status</title>
+</head>
+<body>
+    <h1>URL Status</h1>
+    <table>
+        <tr>
+            <th>URL</th>
+            <th>Status Code</th>
+            <th>Response Time</th>
+            <th>TLS Valid</th>
+        </tr>
+        {% for data in url_data %}
+        <tr>
+            <td>{{ data[0]
