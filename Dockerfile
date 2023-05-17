@@ -1,5 +1,6 @@
 # Use the official Python base image
-FROM python:3.9
+FROM python:3.8
+RUN /usr/local/bin/python -m pip install --upgrade pip
 
 # Set the working directory
 WORKDIR /app

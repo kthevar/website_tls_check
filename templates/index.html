@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Status</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .red { background-color: red; }
+        .orange { background-color: orange; }
+        .yellow { background-color: yellow; }
+        .light-yellow { background-color: lightyellow; }
+        .green { background-color: lightgreen; }
+    </style>
+</head>
+<body>
+    <h1>Website Status</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>URL</th>
+                <th>HTTP Response Code</th>
+                <th>Response Time (ms)</th>
+                <th>TLS Certificate Valid?</th>
+                <th>TLS Certificate Expiration Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for url, status_code, response_time, tls_valid, expiration_date, days_till_expiry in url_data %}
+            {% set row_color = 'green' if days_till_expiry > 365 else 'light-yellow' if days_till_expiry > 180 else 'yellow' if days_till_expiry > 60 else 'orange' if days_till_expiry > 30 else 'red' %}
+            <tr class="{{ row_color }}">
+                <td>{{ url }}</td>
+                <td>{{ status_code }}</td>
+                <td>{{ "%.2f"|format(response_time) }}</td>
+                <td>{{ 'Valid' if tls_valid else 'Invalid' }}</td>
+                <td>{{ expiration_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

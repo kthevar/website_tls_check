@@ -1,0 +1,2 @@
+docker build -t karuthevar/website_tls_check:17_may_2023 . && docker push karuthevar/website_tls_check:17_may_2023
+docker run -d -p 5000:5000 karuthevar/website_tls_check:17_may_2023
